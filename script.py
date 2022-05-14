@@ -9,12 +9,7 @@ import os
 PATH = os.getcwd() + '\chromedriver.exe'
 driver = webdriver.Chrome(PATH)
 
-def check_exists_by_xpath(xpath):
-    try:
-        driver.find_element_by_xpath(xpath)
-    except NoSuchElementException:
-        return False
-    return True
+loopCount = 0
 
 while True:
     driver.get("https://skribbl.io")
@@ -32,7 +27,7 @@ while True:
     field = driver.find_element_by_xpath('//*[@id="inputChat"]')
 
 
-    while(check_exists_by_xpath('//*[@id="inputChat"]')):
+    while(True):
         try: 
             field.send_keys("*SPAM GOES HERE")
         except:
@@ -40,3 +35,6 @@ while True:
         else:
             field.send_keys(Keys.RETURN)
             time.sleep(random.uniform(0.75, 1.5))
+
+    loopCount += 1
+    print('Script has run', loopCount, 'times')
